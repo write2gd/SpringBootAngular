@@ -1,11 +1,23 @@
 package com.gd.learn.angular.rest;
 
+import java.util.Collections;
 import java.util.stream.Stream;
 
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.env.Environment;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
 import com.gd.learn.angular.rest.middleware.CarService;
 import com.gd.learn.angular.rest.middleware.UserAccountService;
@@ -14,8 +26,21 @@ import com.gd.learn.angular.rest.model.User;
 
 @SpringBootApplication
 public class RestApplication {
+
+    @Autowired
+    private Environment environment;
+
+
     public static void main(String[] args) {
-        SpringApplication.run(RestApplication.class, args);
+        ApplicationContext applicationContext = SpringApplication.run(RestApplication.class, args);
+        for (String name : applicationContext.getBeanDefinitionNames()) {
+            System.out.println(name);
+        }
+    }
+    @PostConstruct
+    private void init(){
+        System.out.println("Spring Boot - active profile: " + environment.getActiveProfiles());
+
     }
 
     @Bean
@@ -49,5 +74,18 @@ public class RestApplication {
         };
 
     }
-
+    @Bean
+    @SuppressWarnings("unchecked")
+    public FilterRegistrationBean simpleCorsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.setAllowedOrigins(Collections.singletonList("*"));
+        config.setAllowedMethods(Collections.singletonList("*"));
+        config.setAllowedHeaders(Collections.singletonList("*"));
+        source.registerCorsConfiguration("/api/**", config);
+        FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
+        return bean;
+    }
 }
