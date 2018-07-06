@@ -6,11 +6,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CarListComponent } from './home/car-list/car-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CarEditComponent } from './home/car-edit/car-edit.component';
+import {RouterModule} from "@angular/router";
+import {appRoutes} from "./Route";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
-    CarListComponent
+    CarListComponent,
+    CarEditComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +25,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     MatInputModule,
     MatListModule,
-    MatToolbarModule
+    MatToolbarModule,
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [CarService],
   bootstrap: [AppComponent]
