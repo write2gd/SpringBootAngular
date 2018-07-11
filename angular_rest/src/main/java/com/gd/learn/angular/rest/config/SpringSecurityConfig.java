@@ -23,7 +23,6 @@ import org.springframework.web.filter.CorsFilter;
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        System.out.println("#######################################");
         http.csrf()
             .disable()
             .anonymous()

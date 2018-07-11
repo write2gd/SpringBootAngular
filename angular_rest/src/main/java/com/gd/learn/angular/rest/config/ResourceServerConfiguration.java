@@ -13,7 +13,6 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        System.out.println("*******************************");
         http.csrf()
             .disable()
             .anonymous()
