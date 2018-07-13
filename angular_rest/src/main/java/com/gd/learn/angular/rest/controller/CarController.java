@@ -26,40 +26,40 @@ class CarController {
 
 
     @GetMapping
-    @CrossOrigin(origins = "http://localhost:4200/*")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Car> allCars() {
         return carService.getAllCars();
     }
 
     @GetMapping("/luxury")
-    @CrossOrigin(origins = "http://localhost:4200/*")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<Car> luxuryCars() {
         return carService.getAllLuxuryCars();
 
     }
 
     @DeleteMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:4200/*")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void deleteCars(@PathVariable Long id) {
         carService.deleteById(id);
 
     }
 
     @GetMapping("/{id}")
-    @CrossOrigin(origins = "http://localhost:4200/*")
+    @CrossOrigin(origins = "http://localhost:4200")
     public Car getCar(@PathVariable Long id) {
         return carService.getById(id);
 
     }
 
     @PostMapping
-    @CrossOrigin(origins = "http://localhost:4200/*")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void addCar(@RequestBody Car car) {
         carService.saveCar(car);
     }
 
     @PutMapping
-    @CrossOrigin(origins = "http://localhost:4200/*")
+    @CrossOrigin(origins = "http://localhost:4200")
     public void updatedCar(@RequestBody Car car) {
         carService.saveCar(car);
     }

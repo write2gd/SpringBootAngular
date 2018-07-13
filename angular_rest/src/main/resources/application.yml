@@ -29,7 +29,7 @@ server:
 
 debug: false
 
-#Swagger Configuration
+
 springfox:
   documentation:
     swagger:

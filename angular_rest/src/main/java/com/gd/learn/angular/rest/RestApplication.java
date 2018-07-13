@@ -10,9 +10,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.env.Environment;
 import org.springframework.web.cors.CorsConfiguration;
@@ -26,23 +24,17 @@ import com.gd.learn.angular.rest.model.User;
 
 @SpringBootApplication
 public class RestApplication {
-
     @Autowired
     private Environment environment;
 
-
     public static void main(String[] args) {
-        ApplicationContext applicationContext = SpringApplication.run(RestApplication.class, args);
-        for (String name : applicationContext.getBeanDefinitionNames()) {
-            System.out.println(name);
-        }
+        SpringApplication.run(RestApplication.class, args);
     }
     @PostConstruct
     private void init(){
         System.out.println("Spring Boot - active profile: " + environment.getActiveProfiles());
 
     }
-
     @Bean
     ApplicationRunner init(CarService carService, UserAccountService accountService) {
 
